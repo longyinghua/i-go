@@ -1,0 +1,68 @@
+{"L":"[ERROR]","T":"2023-11-20 11:59:29.033","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 11:59:29.050","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 11:59:29.050","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 11:59:29.050","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 11:59:29.051","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"https://baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 11:59:29.051","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 https://baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 11:59:29.051","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 11:59:29.051","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:30.702","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 12:00:30.719","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:30.719","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:30.719","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:30.720","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"https://www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 12:00:30.720","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 https://www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:30.720","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:30.720","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:46.742","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 12:00:46.760","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:46.760","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:46.760","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:46.760","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"http://www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 12:00:46.761","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 http://www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:46.761","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 12:00:46.761","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 13:16:31.789","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 13:16:31.806","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 13:16:31.806","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 13:16:31.806","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 13:16:31.806","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"http://www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 13:16:31.806","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 http://www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 13:16:31.806","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 13:16:31.807","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 13:17:12.715","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 13:17:12.733","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 13:17:12.733","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 13:17:12.733","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 13:17:12.733","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"https://www.baidu.com","error":"Get \"url\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 13:17:12.733","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 https://www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"url\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 13:17:12.734","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 13:17:12.734","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 13:24:23.770","C":"[logger/logger.go:143]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"www.baidu.com\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 13:24:23.787","C":"[logger/logger.go:118]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"www.baidu.com\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 13:24:23.787","C":"[logger/logger.go:143]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 13:24:23.787","C":"[logger/logger.go:118]","M":"--------test mingcheng------------"}
+2023-11-20 13:26:56.764	[ERROR]	[logger/logger.go:143]	Error fetching url...	{"url": "www.baidu.com", "error": "Get \"www.baidu.com\": unsupported protocol scheme \"\""}
+2023-11-20 13:26:56.781	[ERROR]	[logger/logger.go:118]	Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get "www.baidu.com": unsupported protocol scheme ""})
+2023-11-20 13:26:56.781	[ERROR]	[logger/logger.go:143]	---------test
+2023-11-20 13:26:56.781	[ERROR]	[logger/logger.go:118]	--------test mingcheng------------
+2023-11-20 13:28:04.355	[ERROR]	[logger/logger.go:143]	Error fetching url...	{"url": "www.baidu.com", "error": "Get \"www.baidu.com\": unsupported protocol scheme \"\""}
+2023-11-20 13:28:04.374	[ERROR]	[logger/logger.go:118]	Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get "www.baidu.com": unsupported protocol scheme ""})
+2023-11-20 13:28:04.374	[ERROR]	[logger/logger.go:143]	---------test
+2023-11-20 13:28:04.374	[ERROR]	[logger/logger.go:118]	--------test mingcheng------------
+{"L":"\u001b[31mERROR\u001b[0m","T":"2023-11-20 13:48:24.130","C":"[logger/logger.go:145]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"www.baidu.com\": unsupported protocol scheme \"\""}
+{"L":"\u001b[31mERROR\u001b[0m","T":"2023-11-20 13:48:24.146","C":"[logger/logger.go:120]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"www.baidu.com\": unsupported protocol scheme \"\"})"}
+{"L":"\u001b[31mERROR\u001b[0m","T":"2023-11-20 13:48:24.146","C":"[logger/logger.go:145]","M":"---------test"}
+{"L":"\u001b[31mERROR\u001b[0m","T":"2023-11-20 13:48:24.147","C":"[logger/logger.go:120]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 13:49:24.412","C":"[logger/logger.go:145]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"www.baidu.com\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 13:49:24.430","C":"[logger/logger.go:120]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"www.baidu.com\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 13:49:24.430","C":"[logger/logger.go:145]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 13:49:24.430","C":"[logger/logger.go:120]","M":"--------test mingcheng------------"}
+{"L":"[ERROR]","T":"2023-11-20 14:06:02.917","C":"[logger/logger.go:145]","M":"Error fetching url...","url":"www.baidu.com","error":"Get \"www.baidu.com\": unsupported protocol scheme \"\""}
+{"L":"[ERROR]","T":"2023-11-20 14:06:02.934","C":"[logger/logger.go:120]","M":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"www.baidu.com\": unsupported protocol scheme \"\"})"}
+{"L":"[ERROR]","T":"2023-11-20 14:06:02.935","C":"[logger/logger.go:145]","M":"---------test"}
+{"L":"[ERROR]","T":"2023-11-20 14:06:02.935","C":"[logger/logger.go:120]","M":"--------test mingcheng------------"}
+{"Level":"[ERROR]","Time":"2023-11-20 14:11:23.913","Call":"[logger/logger.go:145]","Msg":"Error fetching url...","url":"www.baidu.com","error":"Get \"www.baidu.com\": unsupported protocol scheme \"\""}
+{"Level":"[ERROR]","Time":"2023-11-20 14:11:23.931","Call":"[logger/logger.go:120]","Msg":"Error fetching url...%!(EXTRA zapcore.Field={url 15 0 www.baidu.com <nil>}, zapcore.Field={error 26 0  Get \"www.baidu.com\": unsupported protocol scheme \"\"})"}
+{"Level":"[ERROR]","Time":"2023-11-20 14:11:23.931","Call":"[logger/logger.go:145]","Msg":"---------test"}
+{"Level":"[ERROR]","Time":"2023-11-20 14:11:23.931","Call":"[logger/logger.go:120]","Msg":"--------test mingcheng------------"}

@@ -1,0 +1,28 @@
+{"L":"[INFO]","T":"2023-11-20 13:24:32.004","C":"[logger/logger.go:135]","M":"Success---","StatusCode":"200 OK","url":"https://www.baidu.com"}
+{"L":"[INFO]","T":"2023-11-20 13:24:32.005","C":"[logger/logger.go:110]","M":"Success---%!(EXTRA zapcore.Field={StatusCode 15 0 200 OK <nil>}, zapcore.Field={url 15 0 https://www.baidu.com <nil>})"}
+{"L":"[INFO]","T":"2023-11-20 13:24:32.005","C":"[logger/logger.go:110]","M":"-------------test info"}
+{"L":"[INFO]","T":"2023-11-20 13:24:32.005","C":"[logger/logger.go:110]","M":"-------------test info name-------"}
+2023-11-20 13:27:05.017	[INFO]	[logger/logger.go:135]	Success---	{"StatusCode": "200 OK", "url": "https://www.baidu.com"}
+2023-11-20 13:27:05.018	[INFO]	[logger/logger.go:110]	Success---%!(EXTRA zapcore.Field={StatusCode 15 0 200 OK <nil>}, zapcore.Field={url 15 0 https://www.baidu.com <nil>})
+2023-11-20 13:27:05.018	[INFO]	[logger/logger.go:110]	-------------test info
+2023-11-20 13:27:05.018	[INFO]	[logger/logger.go:110]	-------------test info name-------
+2023-11-20 13:28:12.587	[INFO]	[logger/logger.go:135]	Success---	{"StatusCode": "200 OK", "url": "https://www.baidu.com"}
+2023-11-20 13:28:12.588	[INFO]	[logger/logger.go:110]	Success---%!(EXTRA zapcore.Field={StatusCode 15 0 200 OK <nil>}, zapcore.Field={url 15 0 https://www.baidu.com <nil>})
+2023-11-20 13:28:12.588	[INFO]	[logger/logger.go:110]	-------------test info
+2023-11-20 13:28:12.588	[INFO]	[logger/logger.go:110]	-------------test info name-------
+{"L":"\u001b[34mINFO\u001b[0m","T":"2023-11-20 13:48:32.393","C":"[logger/logger.go:137]","M":"Success---","StatusCode":"200 OK","url":"https://www.baidu.com"}
+{"L":"\u001b[34mINFO\u001b[0m","T":"2023-11-20 13:48:32.394","C":"[logger/logger.go:112]","M":"Success---%!(EXTRA zapcore.Field={StatusCode 15 0 200 OK <nil>}, zapcore.Field={url 15 0 https://www.baidu.com <nil>})"}
+{"L":"\u001b[34mINFO\u001b[0m","T":"2023-11-20 13:48:32.394","C":"[logger/logger.go:112]","M":"-------------test info"}
+{"L":"\u001b[34mINFO\u001b[0m","T":"2023-11-20 13:48:32.394","C":"[logger/logger.go:112]","M":"-------------test info name-------"}
+{"L":"[INFO]","T":"2023-11-20 13:49:32.641","C":"[logger/logger.go:137]","M":"Success---","StatusCode":"200 OK","url":"https://www.baidu.com"}
+{"L":"[INFO]","T":"2023-11-20 13:49:32.642","C":"[logger/logger.go:112]","M":"Success---%!(EXTRA zapcore.Field={StatusCode 15 0 200 OK <nil>}, zapcore.Field={url 15 0 https://www.baidu.com <nil>})"}
+{"L":"[INFO]","T":"2023-11-20 13:49:32.642","C":"[logger/logger.go:112]","M":"-------------test info"}
+{"L":"[INFO]","T":"2023-11-20 13:49:32.642","C":"[logger/logger.go:112]","M":"-------------test info name-------"}
+{"L":"[INFO]","T":"2023-11-20 14:06:11.181","C":"[logger/logger.go:137]","M":"Success---","StatusCode":"200 OK","url":"https://www.baidu.com"}
+{"L":"[INFO]","T":"2023-11-20 14:06:11.181","C":"[logger/logger.go:112]","M":"Success---%!(EXTRA zapcore.Field={StatusCode 15 0 200 OK <nil>}, zapcore.Field={url 15 0 https://www.baidu.com <nil>})"}
+{"L":"[INFO]","T":"2023-11-20 14:06:11.181","C":"[logger/logger.go:112]","M":"-------------test info"}
+{"L":"[INFO]","T":"2023-11-20 14:06:11.181","C":"[logger/logger.go:112]","M":"-------------test info name-------"}
+{"Level":"[INFO]","Time":"2023-11-20 14:11:32.140","Call":"[logger/logger.go:137]","Msg":"Success---","StatusCode":"200 OK","url":"https://www.baidu.com"}
+{"Level":"[INFO]","Time":"2023-11-20 14:11:32.140","Call":"[logger/logger.go:112]","Msg":"Success---%!(EXTRA zapcore.Field={StatusCode 15 0 200 OK <nil>}, zapcore.Field={url 15 0 https://www.baidu.com <nil>})"}
+{"Level":"[INFO]","Time":"2023-11-20 14:11:32.140","Call":"[logger/logger.go:112]","Msg":"-------------test info"}
+{"Level":"[INFO]","Time":"2023-11-20 14:11:32.141","Call":"[logger/logger.go:112]","Msg":"-------------test info name-------"}
