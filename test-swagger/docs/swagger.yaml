@@ -20,11 +20,11 @@ definitions:
       msg:
         type: string
     type: object
-host: localhost:8080
+host: 10.40.3.9:8080
 info:
   contact:
-    email: xueduan.li@gmail.com
-    name: lixd
+    email: 542791872@qq.com
+    name: longyinghua
     url: https://lixueduan.com
   description: This is a sample server.
   license:
@@ -49,11 +49,11 @@ paths:
       - application/json
       responses:
         "200":
-          description: '{"msg": "hello  lixd"}'
+          description: "{\"msg\": \"hello\tlixd\"}"
           schema:
             type: string
         "400":
-          description: '{"msg": "who    are  you"}'
+          description: "{\"msg\": \"who\tare\tyou\"}"
           schema:
             type: string
       summary: 测试SayHello

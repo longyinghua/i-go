@@ -6,5 +6,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="code" />
+    <orderEntry type="module" module-name="liwenzhou" />
   </component>
 </module>
