@@ -65,11 +65,11 @@ func timeEncoder(time time.Time, encoder zapcore.PrimitiveArrayEncoder) {
 func GetEncoder() zapcore.Encoder {
 	//自定义日志编码配置，下方NewJSONEncoder输出如下的日志格式
 	//{"L":"[INFO]","T":"2022-09-16 14:24:59.552","C":"[prototest/main.go:113]","M":"name = xiaoli, age = 18"}
-	return zapcore.NewJSONEncoder(NewEncoderConfig())
+	//return zapcore.NewJSONEncoder(NewEncoderConfig())
 
 	//下方NewConsoleEncoder输出如下的日志格式
 	//2022-09-16 14:26:02.933 [INFO]  [prototest/main.go:113] name = xiaoli, age = 18
-	//return zapcore.NewConsoleEncoder(NewEncoderConfig())
+	return zapcore.NewConsoleEncoder(NewEncoderConfig())
 }
 
 // core 三个参数之 日志记录器，日志输出路径

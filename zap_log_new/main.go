@@ -42,7 +42,7 @@ func simpleHttpGet(url string) {
 			zap.String("StatusCode", response.Status),
 			zap.String("url", url),
 		)
-		logger.Infof("-------------test info")
+		logger.Info("-------------test info")
 		logger.Infof("-------------test info %s", s)
 		response.Body.Close()
 	}

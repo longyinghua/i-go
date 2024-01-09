@@ -134,6 +134,6 @@ func InitLogger(cfg config.LogConfig) (err error) {
 
 	core := zapcore.NewCore(encoder, writeSyncer, l)
 	logger := zap.New(core, zap.AddCaller())
-	zap.ReplaceGlobals(logger) //替换zap包中全局的Logger实例，后续在其他包中秩序使用zap.L()调用即可
+	zap.ReplaceGlobals(logger) //替换zap包中全局的Logger实例，后续在其他包中只需使用zap.L()调用即可
 	return
 }
