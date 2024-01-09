@@ -5,6 +5,7 @@ import (
 	"github.com/juju/ratelimit"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"log"
 	"net/http"
 	"strconv"
 	_ "test-swagger/docs"
@@ -130,6 +131,6 @@ func RateLimitMiddleware(fillInterval time.Duration, cap int64) gin.HandlerFunc 
 		context.Next()
 
 		var limiter = ratelimit.NewBucketWithQuantum(time.Second, 10, 10)
-
+		log.Printf("limiter.TakeAvailable(1) = %d", limiter.TakeAvailable(1))
 	}
 }
