@@ -12,7 +12,7 @@ func UpdateBook() {
 	//resultInfo, err := query.Book.WithContext(context.Background()).Where(query.Book.ID.Eq(3), query.Book.Price.Eq(300)).Update(query.Book.Price, 200) //  where多条件，WHERE `book`.`id` = 3 AND `book`.`price` = 300
 
 	if err != nil {
-		fmt.Printf("update book error: %v\n", err)
+		//fmt.Printf("update book error: %v\n", err)
 		return
 	}
 	fmt.Printf("RowsAffected book result: %v\n", resultInfo.RowsAffected)

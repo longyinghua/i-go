@@ -2,10 +2,8 @@ package mysqlcrud
 
 import (
 	"context"
-	"fmt"
 	"go-gorm-swagger-zap/dal/model"
 	"go-gorm-swagger-zap/dal/query"
-	"log"
 )
 
 // SelectBook1
@@ -20,10 +18,10 @@ func SelectBook1() *model.Book {
 	//book, err := query.Book.WithContext(context.Background()).Last() //  单条查询通过逐渐id逆向排序取到第一条数据 Get the first record ordered by primary key
 	//book, err := query.Book.WithContext(context.Background()).Take() //  单条查询，只取一条数据，如果没有找到记录，则返回 ErrRecordNotFound 错误
 	if err != nil {
-		fmt.Printf("query book error: %v\n", err)
+		//fmt.Printf("query book error: %v\n", err)
 		return nil
 	}
-	fmt.Printf("query book result: %v\n", book)
+	//fmt.Printf("query book result: %v\n", book)
 
 	return book
 }
@@ -36,7 +34,7 @@ func SelectBook1() *model.Book {
 func SelectBook2() []*model.Book {
 	books, err := query.Book.WithContext(context.Background()).Find() //   SELECT * FROM `book`
 	if err != nil {
-		fmt.Printf("query book error: %v\n", err)
+		//fmt.Printf("query book error: %v\n", err)
 		return nil
 	}
 
@@ -52,7 +50,7 @@ func SelectBook2() []*model.Book {
 func SelectBook3(id ...int64) []*model.Book {
 	books, err := query.Book.WithContext(context.Background()).Where(query.Book.ID.In(id...)).Find()
 	if err != nil {
-		log.Printf("query book error: %v\n", err)
+		//log.Printf("query book error: %v\n", err)
 		return nil
 	}
 
@@ -70,7 +68,7 @@ func SelectBook4(book *model.Book) []*model.Book {
 	ctx := context.Background()
 	books, err := u.WithContext(ctx).Where(u.ID.Gt(book.ID), u.Author.Neq(book.Author)).Find() //  book.ID,book.Author为结构体中的字段，可以根据请求体中的body绑定模型结构体后取具体的字段作为SQL条件进行查询
 	if err != nil {
-		fmt.Printf("query book error: %v\n", err)
+		//fmt.Printf("query book error: %v\n", err)
 		return nil
 	}
 
@@ -88,7 +86,7 @@ func SelectBook5(book *model.Book) []*model.Book {
 	ctx := context.Background()
 	books, err := u.WithContext(ctx).Where(u.ID.Gt(book.ID), u.Author.Neq(book.Author)).Find()
 	if err != nil {
-		fmt.Printf("query book error: %v\n", err)
+		//fmt.Printf("query book error: %v\n", err)
 		return nil
 	}
 

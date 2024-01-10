@@ -4,8 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"go-gorm-swagger-zap/dal/model"
+	"go-gorm-swagger-zap/logger"
 	"go-gorm-swagger-zap/mysqlcrud"
-	"log"
+	"go.uber.org/zap"
 	"net/http"
 )
 
@@ -17,6 +18,7 @@ func BookInfo1() gin.HandlerFunc {
 			"msg":  "success",
 			"code": 200,
 		})
+		logger.Logger.Info("查询成功---------")
 	}
 }
 
@@ -28,6 +30,8 @@ func BookInfo2() gin.HandlerFunc {
 			"msg":  "success",
 			"code": 200,
 		})
+		logger.Logger.Info("查询结果", zap.Any("book", book2))
+		//zap.L().Info("查询结果",zap.Any("book",book2))
 	}
 }
 
@@ -38,7 +42,9 @@ func BookInfo3() gin.HandlerFunc {
 
 		err := c.ShouldBindJSON(&book)
 		if err != nil {
-			log.Printf("book param bind json err:%v", err)
+			//log.Printf("book param bind json err:%v", err)
+			logger.Logger.Error("book param bind json error", zap.Any("error", err.Error()))
+			//zap.L().Error("book param bind json error", zap.Any("error", err.Error()))
 			return
 		}
 
@@ -47,10 +53,12 @@ func BookInfo3() gin.HandlerFunc {
 			//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 			_, ok := err.(validator.ValidationErrors)
 			if !ok {
-				c.JSON(http.StatusOK, gin.H{
+				c.JSON(http.StatusBadRequest, gin.H{
 					//不是validator.validationErrors类型errors的错误直接返回错误信息
 					"msg": err.Error(),
 				})
+				logger.Logger.Error("参数校验错误", zap.String("error", err.Error()))
+				//zap.L().Error("参数校验错误",zap.String("error",err.Error()))
 				return
 			}
 		}
@@ -61,6 +69,7 @@ func BookInfo3() gin.HandlerFunc {
 			"msg":  "success",
 			"code": 200,
 		})
+		logger.Logger.Info("查询成功---------")
 	}
 }
 
@@ -71,7 +80,9 @@ func BookInfo4() gin.HandlerFunc {
 
 		err := c.ShouldBindJSON(&book)
 		if err != nil {
-			log.Printf("book param bind json err:%v", err)
+			//log.Printf("book param bind json err:%v", err)
+			logger.Logger.Error("book param bind json error", zap.Any("error", err.Error()))
+			//zap.L().Error("book param bind json error", zap.Any("error", err.Error()))
 			return
 		}
 
@@ -84,6 +95,8 @@ func BookInfo4() gin.HandlerFunc {
 					//不是validator.validationErrors类型errors的错误直接返回错误信息
 					"msg": err.Error(),
 				})
+				logger.Logger.Error("参数校验错误", zap.String("error", err.Error()))
+				//zap.L().Error("参数校验错误",zap.String("error",err.Error()))
 				return
 			}
 		}
@@ -94,6 +107,7 @@ func BookInfo4() gin.HandlerFunc {
 			"msg":  "success",
 			"code": 200,
 		})
+		logger.Logger.Info("查询成功---------")
 	}
 }
 
@@ -108,10 +122,12 @@ func BookInfo5(c *gin.Context) {
 		//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 		_, ok := err.(validator.ValidationErrors)
 		if !ok {
-			c.JSON(http.StatusOK, gin.H{
+			c.JSON(http.StatusBadRequest, gin.H{
 				//不是validator.validationErrors类型errors的错误直接返回错误信息
 				"msg": err.Error(),
 			})
+			logger.Logger.Error("参数校验错误", zap.String("error", err.Error()))
+			//zap.L().Error("参数校验错误",zap.String("error",err.Error()))
 			return
 		}
 	}
@@ -125,6 +141,7 @@ func BookInfo5(c *gin.Context) {
 		"msg":  "success",
 		"code": 200,
 	})
+	logger.Logger.Info("查询成功---------")
 
 	return
 }
@@ -133,7 +150,9 @@ func BookInfo6(c *gin.Context) {
 	var book model.Book
 	err := c.ShouldBindJSON(&book)
 	if err != nil {
-		log.Printf("bind json error: %v\n", err)
+		//log.Printf("bind json error: %v\n", err)
+		logger.Logger.Error("book param bind json error", zap.Any("error", err.Error()))
+		//zap.L().Error("book param bind json error", zap.Any("error", err.Error()))
 		return
 	}
 
@@ -142,10 +161,12 @@ func BookInfo6(c *gin.Context) {
 		//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 		_, ok := err.(validator.ValidationErrors)
 		if !ok {
-			c.JSON(http.StatusOK, gin.H{
+			c.JSON(http.StatusBadRequest, gin.H{
 				//不是validator.validationErrors类型errors的错误直接返回错误信息
 				"msg": err.Error(),
 			})
+			logger.Logger.Error("参数校验错误", zap.String("error", err.Error()))
+			//zap.L().Error("参数校验错误",zap.String("error",err.Error()))
 			return
 		}
 	}
@@ -157,6 +178,7 @@ func BookInfo6(c *gin.Context) {
 		"msg":  "success",
 		"code": 200,
 	})
+	logger.Logger.Info("查询成功---------")
 
 	return
 }

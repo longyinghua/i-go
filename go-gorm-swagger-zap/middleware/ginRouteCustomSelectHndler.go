@@ -6,8 +6,9 @@ import (
 	"github.com/go-playground/validator/v10"
 	"go-gorm-swagger-zap/dal/model"
 	"go-gorm-swagger-zap/dal/query"
+	"go-gorm-swagger-zap/logger"
 	"go-gorm-swagger-zap/mysqlcrud"
-	"log"
+	"go.uber.org/zap"
 	"net/http"
 )
 
@@ -28,21 +29,19 @@ func CustomSelect1() gin.HandlerFunc {
 		var book model.Book
 
 		err := c.ShouldBindJSON(&book)
-		if err != nil {
-			log.Printf("book param bind json err:%v", err)
-			return
-		}
 
 		//  参数校验
 		if err != nil {
 			//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 			_, ok := err.(validator.ValidationErrors)
 			if !ok {
-				c.JSON(http.StatusOK, gin.H{
+				c.JSON(http.StatusBadRequest, gin.H{
 					//不是validator.validationErrors类型errors的错误直接返回错误信息
 					"msg":  err.Error(),
 					"code": 400,
 				})
+				logger.Logger.Error("book param bind json error", zap.Any("msg", err.Error()))
+				//zap.L().Error("book param bind json error", zap.Any("msg", err.Error()))
 				return
 			}
 		}
@@ -53,6 +52,8 @@ func CustomSelect1() gin.HandlerFunc {
 				"msg":  err.Error(),
 				"code": 400,
 			})
+			logger.Logger.Error("book select 记录未找到", zap.Any("msg", err.Error()))
+			//zap.L().Error("book select error", zap.Any("msg", err.Error()))
 			return
 		}
 
@@ -61,6 +62,8 @@ func CustomSelect1() gin.HandlerFunc {
 			"msg":  "success",
 			"code": 200,
 		})
+		logger.Logger.Info("book select success", zap.Any("msg", "success"))
+		//zap.L().Info("book select success", zap.Any("msg", "success"))
 	}
 }
 
@@ -78,24 +81,19 @@ func CustomSelect1() gin.HandlerFunc {
 func CustomSelect2(ctx *gin.Context) {
 	var book model.Book
 	err := ctx.ShouldBindJSON(&book)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg":  err.Error(),
-			"code": 400,
-		})
-		return
-	}
 
 	//  参数校验
 	if err != nil {
 		//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 		_, ok := err.(validator.ValidationErrors)
 		if !ok {
-			ctx.JSON(http.StatusOK, gin.H{
+			ctx.JSON(http.StatusBadRequest, gin.H{
 				//不是validator.validationErrors类型errors的错误直接返回错误信息
 				"msg":  err.Error(),
 				"code": 400,
 			})
+			logger.Logger.Error("book param bind json error", zap.Any("msg", err.Error()))
+			//zap.L().Error("book param bind json error", zap.Any("msg", err.Error()))
 			return
 		}
 	}
@@ -106,6 +104,8 @@ func CustomSelect2(ctx *gin.Context) {
 			"msg":  err.Error(),
 			"code": 400,
 		})
+		logger.Logger.Error("book select 记录未找到", zap.Any("msg", err.Error()))
+		//zap.L().Error("book select error", zap.Any("msg", err.Error()))
 		return
 	}
 
@@ -132,23 +132,19 @@ func CustomSelect3(ctx *gin.Context) {
 	var book model.Book
 
 	err := ctx.ShouldBindJSON(&book)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg": err.Error(),
-		})
-		return
-	}
 
 	//  参数校验
 	if err != nil {
 		//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 		_, ok := err.(validator.ValidationErrors)
 		if !ok {
-			ctx.JSON(http.StatusOK, gin.H{
+			ctx.JSON(http.StatusBadRequest, gin.H{
 				//不是validator.validationErrors类型errors的错误直接返回错误信息
 				"msg":  err.Error(),
 				"code": 400,
 			})
+			logger.Logger.Error("book param bind json error", zap.Any("msg", err.Error()))
+			//zap.L().Error("book param bind json error", zap.Any("msg", err.Error()))
 			return
 		}
 	}
@@ -159,6 +155,8 @@ func CustomSelect3(ctx *gin.Context) {
 			"msg":  err.Error(),
 			"code": 400,
 		})
+		logger.Logger.Error("book select 记录未找到", zap.Any("msg", err.Error()))
+		//zap.L().Error("book select error", zap.Any("msg", err.Error()))
 		return
 	}
 
@@ -167,6 +165,8 @@ func CustomSelect3(ctx *gin.Context) {
 		"msg":  "success",
 		"code": 200,
 	})
+	logger.Logger.Info("book select success", zap.Any("msg", "success"))
+	//zap.L().Info("book select success", zap.Any("msg", "success"))
 }
 
 // BookSelect4 查询book书籍信息接口-4
@@ -184,24 +184,19 @@ func CustomSelect4(ctx *gin.Context) {
 	var book model.TFilter
 
 	err := ctx.ShouldBindJSON(&book)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg":  err.Error(),
-			"code": 400,
-		})
-		return
-	}
 
 	//  参数校验
 	if err != nil {
 		//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 		_, ok := err.(validator.ValidationErrors)
 		if !ok {
-			ctx.JSON(http.StatusOK, gin.H{
+			ctx.JSON(http.StatusBadRequest, gin.H{
 				//不是validator.validationErrors类型errors的错误直接返回错误信息
 				"msg":  err.Error(),
 				"code": 400,
 			})
+			logger.Logger.Error("book param bind json error", zap.Any("msg", err.Error()))
+			//zap.L().Error("book param bind json error", zap.Any("msg", err.Error()))
 			return
 		}
 	}
@@ -212,6 +207,8 @@ func CustomSelect4(ctx *gin.Context) {
 			"msg":  err.Error(),
 			"code": 400,
 		})
+		logger.Logger.Error("book select 记录未找到", zap.Any("msg", err.Error()))
+		//zap.L().Error("book select error", zap.Any("msg", err.Error()))
 		return
 	}
 
@@ -220,6 +217,8 @@ func CustomSelect4(ctx *gin.Context) {
 		"msg":  "success",
 		"code": 200,
 	})
+	logger.Logger.Info("book select success", zap.Any("msg", "success"))
+	//zap.L().Info("book select success", zap.Any("msg", "success"))
 }
 
 // BookSelect5 查询book书籍信息接口-5
@@ -237,24 +236,19 @@ func CustomSelect5(ctx *gin.Context) {
 	var book model.Book
 
 	err := ctx.ShouldBindJSON(&book)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg":  err.Error(),
-			"code": 400,
-		})
-		return
-	}
 
 	//  参数校验
 	if err != nil {
 		//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 		_, ok := err.(validator.ValidationErrors)
 		if !ok {
-			ctx.JSON(http.StatusOK, gin.H{
+			ctx.JSON(http.StatusBadRequest, gin.H{
 				//不是validator.validationErrors类型errors的错误直接返回错误信息
 				"msg":  err.Error(),
 				"code": 400,
 			})
+			logger.Logger.Error("book param bind json error", zap.Any("msg", err.Error()))
+			//zap.L().Error("book param bind json error", zap.Any("msg", err.Error()))
 			return
 		}
 	}
@@ -265,6 +259,8 @@ func CustomSelect5(ctx *gin.Context) {
 			"msg":  err.Error(),
 			"code": 400,
 		})
+		logger.Logger.Error("book select 记录未找到", zap.Any("msg", err.Error()))
+		//zap.L().Error("book select error", zap.Any("msg", err.Error()))
 		return
 	}
 
@@ -273,6 +269,8 @@ func CustomSelect5(ctx *gin.Context) {
 		"msg":  "success",
 		"code": 200,
 	})
+	logger.Logger.Info("book select success", zap.Any("msg", "success"))
+	//zap.L().Info("book select success", zap.Any("msg", "success"))
 }
 
 // BookSelect6 查询book书籍信息接口-6
@@ -291,24 +289,19 @@ func CustomSelect6(ctx *gin.Context) {
 	var book model.Book
 
 	err := ctx.ShouldBindJSON(&book)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg":  err.Error(),
-			"code": 400,
-		})
-		return
-	}
 
 	//  参数校验
 	if err != nil {
 		//获取validator.validationErrors类型errors，也就是参数不符合tag标签的校验类型错误
 		_, ok := err.(validator.ValidationErrors)
 		if !ok {
-			ctx.JSON(http.StatusOK, gin.H{
+			ctx.JSON(http.StatusBadRequest, gin.H{
 				//不是validator.validationErrors类型errors的错误直接返回错误信息
 				"msg":  err.Error(),
 				"code": 400,
 			})
+			logger.Logger.Error("book param bind json error", zap.Any("msg", err.Error()))
+			//zap.L().Error("book param bind json error", zap.Any("msg", err.Error()))
 			return
 		}
 	}
@@ -319,6 +312,8 @@ func CustomSelect6(ctx *gin.Context) {
 			"msg":  err.Error(),
 			"code": 400,
 		})
+		logger.Logger.Error("book select 记录未找到", zap.Any("msg", err.Error()))
+		//zap.L().Error("book select error", zap.Any("msg", err.Error()))
 		return
 	}
 
@@ -327,4 +322,6 @@ func CustomSelect6(ctx *gin.Context) {
 		"msg":  "success",
 		"code": 200,
 	})
+	logger.Logger.Info("book select success", zap.Any("msg", "success"))
+	//zap.L().Info("book select success", zap.Any("msg", "success"))
 }

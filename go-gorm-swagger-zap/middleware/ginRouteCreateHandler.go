@@ -8,7 +8,6 @@ import (
 	"go-gorm-swagger-zap/logger"
 	"go-gorm-swagger-zap/mysqlcrud"
 	"go.uber.org/zap"
-	"log"
 	"net/http"
 )
 
@@ -51,6 +50,8 @@ func BookCreate1() gin.HandlerFunc {
 					"msg":  err.Error(),
 					"code": 400,
 				})
+				logger.Logger.Error("参数校验失败", zap.String("msg", err.Error()))
+				//zap.L().Error("参数校验失败", zap.String("msg", err.Error()))
 				return
 			}
 		}
@@ -63,7 +64,7 @@ func BookCreate1() gin.HandlerFunc {
 				"msg":  fmt.Sprintf("保存数据失败:%v", err),
 			})
 			logger.Logger.Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error()))) //错误信息也在日志中打印出来
-			zap.L().Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error())))       //作用同上
+			//zap.L().Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error())))       //作用同上
 		} else {
 			c.JSON(http.StatusOK, gin.H{
 				"code": 200,
@@ -93,7 +94,8 @@ func BookCreate2(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&book)
 	if err != nil {
-		log.Printf("book param bind json err:%v", err)
+		//log.Printf("book param bind json err:%v", err)
+		logger.Logger.Error("book param bind json error", zap.String("error", err.Error()))
 	}
 
 	//  参数校验
@@ -106,6 +108,8 @@ func BookCreate2(c *gin.Context) {
 				"msg":  err.Error(),
 				"code": 400,
 			})
+			logger.Logger.Error("参数校验失败", zap.String("msg", err.Error()))
+			//zap.L().Error("参数校验失败", zap.String("msg", err.Error()))
 			return
 		}
 	}
@@ -113,15 +117,19 @@ func BookCreate2(c *gin.Context) {
 	err = mysqlcrud.CreateBook1(&book) //  插入数据成功返回true，失败返回false
 
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
+		c.JSON(http.StatusBadRequest, gin.H{
 			"code": 400,
 			"msg":  fmt.Sprintf("保存数据失败:%v", err),
 		})
+		logger.Logger.Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error())))
+		//zap.L().Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error())))
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"code": 200,
 			"msg":  fmt.Sprintf("保存数据成功"),
 		})
+		logger.Logger.Info("保存数据成功", zap.String("msg", "Success"))
+		//zap.L().Info("保存数据成功", zap.String("msg", "Success"))
 	}
 
 }
@@ -156,6 +164,8 @@ func BookCreate3(c *gin.Context) {
 				"error": err.Error(),
 				"code":  400,
 			})
+			logger.Logger.Error("book param bind json error", zap.String("error", err.Error()))
+			//zap.L().Error("book param bind json error", zap.String("error", err.Error()))
 			return
 		}
 	}
@@ -167,11 +177,15 @@ func BookCreate3(c *gin.Context) {
 			"code": 400,
 			"msg":  fmt.Sprintf("保存数据失败:%v", err),
 		})
+		logger.Logger.Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error())))
+		//zap.L().Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error())))
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"code": 200,
 			"msg":  fmt.Sprintf("保存数据成功"),
 		})
+		logger.Logger.Info("保存数据成功", zap.String("msg", "Success"))
+		//zap.L().Info("保存数据成功", zap.String("msg", "Success"))
 	}
 
 }
@@ -228,6 +242,8 @@ func BookCreate4(c *gin.Context) {
 				"error": err.Error(),
 				"code":  400,
 			})
+			logger.Logger.Error("book param bind json error", zap.String("error", err.Error()))
+			//zap.L().Error("book param bind json error", zap.String("error", err.Error()))
 			return
 		}
 	}
@@ -238,15 +254,19 @@ func BookCreate4(c *gin.Context) {
 	//err = mysqlcrud.CreateBook2(BookBody) //  插入数据成功返回true，失败返回false
 
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
+		c.JSON(http.StatusBadRequest, gin.H{
 			"code": 400,
 			"msg":  fmt.Sprintf("保存数据失败:%v", err),
 		})
+		logger.Logger.Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error())))
+		//zap.L().Warn("保存数据失败", zap.String("msg", fmt.Sprintf("%+v", err.Error())))
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"code": 200,
 			"msg":  fmt.Sprintf("保存数据成功"),
 		})
+		logger.Logger.Info("保存数据成功", zap.String("msg", "Success"))
+		//zap.L().Info("保存数据成功", zap.String("msg", "Success"))
 	}
 
 }

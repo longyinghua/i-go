@@ -4,7 +4,6 @@ import (
 	"context"
 	"go-gorm-swagger-zap/dal/model"
 	"go-gorm-swagger-zap/dal/query"
-	"log"
 	"time"
 )
 
@@ -20,7 +19,7 @@ func UpdateBook1(book *model.Book) (int64, error) {
 	ctx := context.Background()
 	resultInfo, err := u.WithContext(ctx).Where(u.Author.Eq(book.Author)).Update(u.Price, book.Price)
 	if err != nil {
-		log.Printf("update book error: %v", err)
+		//log.Printf("update book error: %v", err)
 		return 0, err
 	}
 	rowsAffected := resultInfo.RowsAffected
@@ -40,7 +39,7 @@ func UpdateBook2(book *model.Book) (int64, error) {
 	// 使用 `map` 更新字段
 	resultInfo, err := u.WithContext(ctx).Where(u.ID.Lt(10)).Updates(map[string]interface{}{"author": book.Author, "price": book.Price})
 	if err != nil {
-		log.Printf("update book error: %v", err)
+		//log.Printf("update book error: %v", err)
 		return 0, err
 	}
 	rowsAffected := resultInfo.RowsAffected
@@ -61,7 +60,7 @@ func UpdateBook3(book *model.Book) (int64, error) {
 	// 使用 `struct` 更新字段
 	resultInfo, err := u.WithContext(ctx).Where(u.ID.Lt(10)).Updates(model.Book{Author: book.Author, Price: book.Price})
 	if err != nil {
-		log.Printf("update book error: %v", err)
+		//log.Printf("update book error: %v", err)
 		return 0, err
 	}
 	rowsAffected := resultInfo.RowsAffected
@@ -90,7 +89,7 @@ func UpdateBook4(book *model.Book) (int64, error) {
 		UpdateAt:    time.Time{},
 	})
 	if err != nil {
-		log.Printf("update book error: %v", err)
+		//log.Printf("update book error: %v", err)
 		return 0, err
 	}
 	rowsAffected := resultInfo.RowsAffected

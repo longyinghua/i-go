@@ -4,7 +4,6 @@ import (
 	"context"
 	"go-gorm-swagger-zap/dal/model"
 	"go-gorm-swagger-zap/dal/query"
-	"log"
 )
 
 // DeleteBook1
@@ -21,7 +20,7 @@ func DeleteBook1(book *model.Book) (int64, error) {
 	//resultInfo, err := u.WithContext(ctx).Where(u.Author.Eq(book.Author)).Or(u.ID.Lte(book.ID)).Delete()
 	// DELETE from book where author = "abc" AND id <= 10；
 	if err != nil {
-		log.Printf("delete book error: %v", err)
+		//log.Printf("delete book error: %v", err)
 		return 0, err
 	}
 	rowsAffected := resultInfo.RowsAffected

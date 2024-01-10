@@ -4,7 +4,6 @@ import (
 	"context"
 	"go-gorm-swagger-zap/dal/model"
 	"go-gorm-swagger-zap/dal/query"
-	"log"
 )
 
 // CreateBook1
@@ -18,7 +17,7 @@ func CreateBook1(book *model.Book) error {
 	err := query.Book.WithContext(context.Background()).Create(book) //  插入单条数据
 
 	if err != nil {
-		log.Printf("create book error: %v\n", err)
+		//log.Printf("create book error: %v\n", err)
 		return err
 	}
 
@@ -42,7 +41,7 @@ func CreateBook2(books []*model.Book) error {
 
 	err := u.WithContext(c).Create(books...) // ...*mode.book 表示*model.Book类型切片,*model.Book结果集
 	if err != nil {
-		log.Printf("create book error: %v\n", err)
+		//log.Printf("create book error: %v\n", err)
 		return err
 	}
 
