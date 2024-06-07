@@ -35,6 +35,10 @@ func Getapi() {
 		log.Fatal(err)
 		return
 	}
+
+	fmt.Printf("服务器启动成功")
+	fmt.Printf("服务器启动成功")
+
 }
 
 // 获取url当中的请求参数，即?name=jack&age=18&key=value
