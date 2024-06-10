@@ -86,7 +86,7 @@ func GetInforWriterSyncer() zapcore.WriteSyncer {
 
 	//引入第三方库 Lumberjack 加入日志切割功能
 	infoLumberIO := &lumberjack.Logger{
-		Filename:   "D:\\code\\i-go\\go-gorm-swagger-zap\\info.log",
+		Filename:   "D:\\code\\i-go\\gin-gorm-project-1\\info.log",
 		MaxSize:    1,
 		MaxAge:     3,
 		MaxBackups: 3,
@@ -99,7 +99,7 @@ func GetInforWriterSyncer() zapcore.WriteSyncer {
 
 func GetErrorWriter() zapcore.WriteSyncer {
 	errorLumberIO := &lumberjack.Logger{
-		Filename:   "D:\\code\\i-go\\go-gorm-swagger-zap\\error.log",
+		Filename:   "D:\\code\\i-go\\gin-gorm-project-1\\error.log",
 		MaxSize:    1,
 		MaxAge:     1,
 		MaxBackups: 1,

@@ -2,9 +2,9 @@ package common
 
 import (
 	"fmt"
-	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
-	"xietong.me/ginessential/model"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
@@ -25,12 +25,15 @@ func InitDB() *gorm.DB {
 		port,
 		database,
 		charset)
-	db, err := gorm.Open(driverName, args)
+
+	db, err := gorm.Open(mysql.Open(args))
+
 	if err != nil {
 		panic("fail to connect databse,err:" + err.Error())
 	}
-	db.AutoMigrate(&model.User{})
+
 	DB = db
+
 	return db
 }
 

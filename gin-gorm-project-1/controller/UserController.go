@@ -1,20 +1,20 @@
 package controller
 
 import (
+	"gin-gorm-app1/common"
+	"gin-gorm-app1/dal/model"
+	"gin-gorm-app1/response"
+	"gin-gorm-app1/utils"
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 	"log"
 	"net/http"
-	"xietong.me/ginessential/common"
-	"xietong.me/ginessential/dto"
-	"xietong.me/ginessential/model"
-	"xietong.me/ginessential/response"
-	"xietong.me/ginessential/util"
 )
 
 func Register(ctx *gin.Context) {
 	DB := common.GetDB()
+
 	var requestUser = model.User{}
 	//json.NewDecoder(ctx.Request.Body).Decode(&requestUser)
 	ctx.Bind(&requestUser)
@@ -33,7 +33,8 @@ func Register(ctx *gin.Context) {
 	}
 	//如果名称为空给一个随机字符串
 	if len(name) == 0 {
-		name = util.RandomString(10)
+		// name生成随机字符串
+		name = utils.CreateRandomString(10)
 	}
 	if isTelephoneExist(DB, telephone) {
 		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "用户已存在")
@@ -49,9 +50,12 @@ func Register(ctx *gin.Context) {
 		Telephone: telephone,
 		Password:  string(hasePassowrd),
 	}
+
 	DB.Create(&newUser)
+
 	//发送token
 	token, err := common.ReleaseToken(newUser)
+
 	if err != nil {
 		response.Response(ctx, http.StatusInternalServerError, 500, nil, "系统异常")
 		log.Printf("token generate error:%v", err)

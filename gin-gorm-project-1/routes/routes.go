@@ -1,9 +1,9 @@
-package main
+package routes
 
 import (
+	"gin-gorm-app1/controller"
+	"gin-gorm-app1/middleware"
 	"github.com/gin-gonic/gin"
-	"xietong.me/ginessential/controller"
-	"xietong.me/ginessential/middleware"
 )
 
 func CollectRoute(r *gin.Engine) *gin.Engine {

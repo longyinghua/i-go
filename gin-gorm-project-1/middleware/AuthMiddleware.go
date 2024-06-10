@@ -1,11 +1,11 @@
 package middleware
 
 import (
+	"gin-gorm-app1/common"
+	"gin-gorm-app1/dal/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
-	"xietong.me/ginessential/common"
-	"xietong.me/ginessential/model"
 )
 
 func AuthMiddleware() gin.HandlerFunc {
@@ -30,7 +30,9 @@ func AuthMiddleware() gin.HandlerFunc {
 		//验证通过后获取Claiim中的userId
 		userId := claims.UserId
 		DB := common.GetDB()
+
 		var user model.User
+
 		DB.First(&user, userId)
 
 		//用户不存在

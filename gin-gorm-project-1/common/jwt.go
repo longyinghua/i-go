@@ -1,8 +1,9 @@
 package common
 
 import (
+	"gin-gorm-app1/dal/model"
+	"github.com/dgrijalva/jwt-go"
 	"time"
-	"xietong.me/ginessential/model"
 )
 
 var jwtkey = []byte("a_secret_create")
