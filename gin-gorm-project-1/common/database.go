@@ -10,8 +10,8 @@ import (
 var DB *gorm.DB
 
 func InitDB() *gorm.DB {
-	fmt.Println(viper.GetString("datasource.driverName"))
-	driverName := viper.GetString("datasource.driverName")
+	//fmt.Println(viper.GetString("datasource.driverName"))
+	//driverName := viper.GetString("datasource.driverName")
 	host := viper.GetString("datasource.host")
 	port := viper.GetString("datasource.port")
 	database := viper.GetString("datasource.database")

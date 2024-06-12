@@ -1,5 +1,5 @@
 // Package ret 统一返回结构
-package ret
+package response
 
 import (
 	"net/http"
@@ -10,30 +10,30 @@ const (
 	MsgFail    = "fail"
 )
 
-type Result struct {
+type result struct {
 	Code int         `json:"code"`
 	Data interface{} `json:"data"`
 	Msg  string      `json:"msg"`
 }
 
-func Success(data interface{}, msg ...string) *Result {
+func success1(data interface{}, msg ...string) *result {
 	var m = MsgSuccess
 	if len(msg) > 0 {
 		m = msg[0]
 	}
-	return &Result{
+	return &result{
 		Code: http.StatusOK,
 		Data: data,
 		Msg:  m,
 	}
 }
 
-func Fail(msg ...string) *Result {
+func fail1(msg ...string) *result {
 	var m = MsgFail
 	if len(msg) > 0 {
 		m = msg[0]
 	}
-	return &Result{
+	return &result{
 		Code: http.StatusBadRequest,
 		Data: "",
 		Msg:  m,

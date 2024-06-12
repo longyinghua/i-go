@@ -4,17 +4,17 @@
 
 package model
 
-const TableNameUser = "user"
+const TableNameTUser = "t_user"
 
-// User mapped from table <user>
-type User struct {
+// TUser mapped from table <t_user>
+type TUser struct {
 	ID        int32  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Name      string `gorm:"column:name;not null" json:"name"`
+	Name      string `gorm:"column:name" json:"name"`
 	Password  string `gorm:"column:password" json:"password"`
 	Telephone string `gorm:"column:telephone" json:"telephone"`
 }
 
-// TableName User's table name
-func (*User) TableName() string {
-	return TableNameUser
+// TableName TUser's table name
+func (*TUser) TableName() string {
+	return TableNameTUser
 }

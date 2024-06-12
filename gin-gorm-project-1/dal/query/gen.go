@@ -16,39 +16,44 @@ import (
 )
 
 var (
-	Q    = new(Query)
-	Book *book
-	User *user
+	Q     = new(Query)
+	Book  *book
+	TUser *tUser
+	User  *user
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	Book = &Q.Book
+	TUser = &Q.TUser
 	User = &Q.User
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:   db,
-		Book: newBook(db, opts...),
-		User: newUser(db, opts...),
+		db:    db,
+		Book:  newBook(db, opts...),
+		TUser: newTUser(db, opts...),
+		User:  newUser(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	Book book
-	User user
+	Book  book
+	TUser tUser
+	User  user
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:   db,
-		Book: q.Book.clone(db),
-		User: q.User.clone(db),
+		db:    db,
+		Book:  q.Book.clone(db),
+		TUser: q.TUser.clone(db),
+		User:  q.User.clone(db),
 	}
 }
 
@@ -62,21 +67,24 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:   db,
-		Book: q.Book.replaceDB(db),
-		User: q.User.replaceDB(db),
+		db:    db,
+		Book:  q.Book.replaceDB(db),
+		TUser: q.TUser.replaceDB(db),
+		User:  q.User.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	Book IBookDo
-	User IUserDo
+	Book  IBookDo
+	TUser ITUserDo
+	User  IUserDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		Book: q.Book.WithContext(ctx),
-		User: q.User.WithContext(ctx),
+		Book:  q.Book.WithContext(ctx),
+		TUser: q.TUser.WithContext(ctx),
+		User:  q.User.WithContext(ctx),
 	}
 }
 

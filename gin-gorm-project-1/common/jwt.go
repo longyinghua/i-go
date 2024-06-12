@@ -9,7 +9,7 @@ import (
 var jwtkey = []byte("a_secret_create")
 
 type Claims struct {
-	UserId uint
+	UserId int32
 	jwt.StandardClaims
 }
 
@@ -20,7 +20,7 @@ func ReleaseToken(user model.User) (string, error) {
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(), //过期时间
 			IssuedAt:  time.Now().Unix(),
-			Issuer:    "xietong.me",
+			Issuer:    "longyh.me",
 			Subject:   "user token",
 		},
 	}

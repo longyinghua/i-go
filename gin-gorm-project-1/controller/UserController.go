@@ -1,122 +1,260 @@
 package controller
 
 import (
+	"errors"
 	"gin-gorm-app1/common"
 	"gin-gorm-app1/dal/model"
 	"gin-gorm-app1/response"
 	"gin-gorm-app1/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
+	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
-	"log"
 	"net/http"
 )
 
+// Register 处理用户注册请求。
+// 它从请求体中解析用户信息，验证用户输入，创建新用户，并生成认证令牌。
+// @Summary 用户注册
+// @Description 用户注册
+// @Tags User注册
+// @Accept json
+// @Produce json
+// @Param user body model.User  true "注册用户信息"
+// @Success 200 {object} response.result{} "注册成功"
+// @Failure 400 {object} response.result{} "请求参数错误"
+// @Failure 422 {object} response.result{} "用户已存在"
+// @Router /auth/register [post]
 func Register(ctx *gin.Context) {
-	DB := common.GetDB()
+	// 解析请求体中的用户信息。
+	var requestUser model.User
+	err := ctx.ShouldBind(&requestUser)
+	if err != nil {
+		// 日志记录绑定过程中的错误。
+		common.Logger.Error("user param bind json error", zap.String("error", err.Error()))
+		// 对非验证错误的绑定问题返回400错误。
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"msg":  err.Error(),
+			"code": 400,
+		})
+		return
+	}
 
-	var requestUser = model.User{}
-	//json.NewDecoder(ctx.Request.Body).Decode(&requestUser)
-	ctx.Bind(&requestUser)
-	//获取参数
+	// 验证用户输入是否符合规则。
+	// 获取参数
 	name := requestUser.Name
 	telephone := requestUser.Telephone
 	password := requestUser.Password
-	//数据验证
+	// 校验手机号长度。
 	if len(telephone) != 11 {
 		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "手机号必须为11位")
 		return
 	}
+	// 校验密码长度。
 	if len(password) < 6 {
 		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "密码不能少于6位")
 		return
 	}
-	//如果名称为空给一个随机字符串
+	// 如果用户名为空，生成一个随机用户名。
 	if len(name) == 0 {
-		// name生成随机字符串
 		name = utils.CreateRandomString(10)
 	}
-	if isTelephoneExist(DB, telephone) {
+	// 检查电话号码是否已存在。
+	if isTelephoneExist(common.DB, telephone) {
 		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "用户已存在")
+		common.Logger.Warn("用户已存在", zap.String("telephone", telephone), zap.String("msg", "用户手机号已存在"))
 		return
 	}
+
+	// 使用bcrypt对密码进行加密。
 	hasePassowrd, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		response.Response(ctx, http.StatusInternalServerError, 500, nil, "加密错误")
+		common.Logger.Error("用户密码加密错误", zap.String("password", password), zap.String("msg", err.Error()))
 		return
 	}
+	// 创建新用户。
 	newUser := model.User{
 		Name:      name,
 		Telephone: telephone,
 		Password:  string(hasePassowrd),
 	}
+	common.DB.Create(&newUser)
 
-	DB.Create(&newUser)
-
-	//发送token
+	// 生成并返回认证令牌。
 	token, err := common.ReleaseToken(newUser)
-
 	if err != nil {
 		response.Response(ctx, http.StatusInternalServerError, 500, nil, "系统异常")
-		log.Printf("token generate error:%v", err)
+		common.Logger.Error("token generate error", zap.String("msg", err.Error()))
+		return
+	}
+	response.Success(ctx, gin.H{"token": token}, "注册成功")
+	common.Logger.Info("用户注册成功", zap.String("telephone", telephone), zap.String("msg", "注册成功"))
+}
+
+// Login处理用户登录请求
+// 它验证用户提供的凭据，并在验证成功后生成并返回一个JWT令牌。
+// @Summary 用户登录
+// @Description 用户登录
+// @Tags User登陆
+// @Accept json
+// @Produce json
+// @Param user body model.User  true "登录用户信息"
+// @Success 200 {object} response.result{} "登录成功"
+// @Failure 400 {object} response.result{} "请求错误"
+// @Failure 500 {object} response.result{} "服务器错误"
+// @Router /auth/login [post]
+func Login(ctx *gin.Context) {
+	// 获取数据库连接
+	db := common.DB
+
+	// 解析请求中的用户数据
+	var requestUser model.User
+	err := ctx.ShouldBind(&requestUser)
+	// 日志记录绑定过程中的任何错误
+	if err != nil {
+		common.Logger.Error("requestuser param bind json error", zap.String("error", err.Error()))
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"msg":  "参数错误" + err.Error(),
+			"code": 400,
+		})
 		return
 	}
 
-	//返回结果
-	response.Success(ctx, gin.H{"token": token}, "注册成功")
-}
+	// 验证用户输入的数据是否符合预期格式
+	//  参数校验
+	if err != nil {
+		_, ok := err.(validator.ValidationErrors)
+		if !ok {
+			ctx.JSON(http.StatusBadRequest, gin.H{"msg": err.Error(), "code": 400})
+			common.Logger.Error("参数校验失败", zap.String("msg", err.Error()))
+			return
+		}
+	}
 
-func Login(c *gin.Context) {
-	db := common.GetDB()
-	//获取参数
-	telephone := c.PostForm("telephone")
-	password := c.PostForm("password")
+	// 提取用户输入的姓名、电话和密码
+	//从用户请求的json中获取参数
+	name := requestUser.Name
+	telephone := requestUser.Telephone
+	password := requestUser.Password
+
+	// 校验电话号码长度
 	//数据验证
 	if len(telephone) != 11 {
-		response.Response(c, http.StatusUnprocessableEntity, 422, nil, "手机号必须为11位")
+		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "手机号必须为11位")
+		common.Logger.Warn("登陆手机号必须为11位", zap.String("telephone", telephone), zap.String("msg", "登陆手机号必须为11位"))
 		return
 	}
+	// 校验密码长度
 	if len(password) < 6 {
-		response.Response(c, http.StatusUnprocessableEntity, 422, nil, "密码不能少于6位")
+		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "密码不能少于6位")
+		common.Logger.Warn("登陆密码不能少于6位", zap.String("telephone", telephone), zap.String("msg", "登陆密码不能少于6位"))
 		return
 	}
-	//判断手机号是否存在
-	var user model.User
-	db.Where("telephone=?", telephone).First(&user)
-	if user.ID == 0 {
-		response.Response(c, http.StatusUnprocessableEntity, 422, nil, "密码不能少于6位")
-		return
+
+	// 根据电话号码查询用户
+	var foundUser model.User
+	//执行查询判断手机号是否存在
+	result := db.Where("telephone = ?", telephone).First(&foundUser)
+
+	// 处理查询错误
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			common.Logger.Warn("用户手机号不存在", zap.String("user", name), zap.String("msg", "用户手机号不存在，请先注册再登陆！"))
+			response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "用户不存在")
+			return
+		} else {
+			common.Logger.Error("查询用户时发生错误", zap.String("error", result.Error.Error()))
+			response.Response(ctx, http.StatusInternalServerError, 500, nil, "系统异常")
+			return
+		}
 	}
+
+	// 校验用户是否存在
 	//判断密码是否正确
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
-		response.Response(c, http.StatusBadRequest, 400, nil, "密码错误")
-		//c.JSON(http.StatusBadRequest, gin.H{"code": 400, "msg": "密码错误"})
+	if foundUser.ID == 0 {
+		common.Logger.Warn("用户手机号不存在", zap.String("user", name), zap.String("msg", "用户手机号不存在，请先注册再登陆！"))
+		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "用户不存在")
 		return
 	}
 
-	//发送token
-	token, err := common.ReleaseToken(user)
-	if err != nil {
-		response.Response(c, http.StatusInternalServerError, 500, nil, "系统异常")
-		//c.JSON(http.StatusInternalServerError, gin.H{"code": 500, "msg": "系统异常"})
-		//log.Printf("token generate error:%v", err)
+	// 校验密码
+	if err := bcrypt.CompareHashAndPassword([]byte(foundUser.Password), []byte(password)); err != nil {
+		common.Logger.Warn("用户登陆密码错误", zap.String("user", foundUser.Name), zap.String("password", password), zap.String("msg", "登陆密码错误"))
+		response.Response(ctx, http.StatusBadRequest, 400, nil, "密码错误")
+		return
 	}
 
+	// 生成并返回JWT令牌
+	//发送token
+	token, err := common.ReleaseToken(foundUser)
+	common.Logger.Info("用户token", zap.String("token", token), zap.String("user", foundUser.Name), zap.String("password", requestUser.Password), zap.String("telephone", foundUser.Telephone))
+	if err != nil {
+		common.Logger.Error("系统异常", zap.String("system 异常", err.Error()))
+		response.Response(ctx, http.StatusInternalServerError, 500, nil, "系统异常")
+		return
+	}
+
+	// 返回成功响应和令牌
 	//返回结果
-	response.Success(c, gin.H{"token": token}, "登陆成功")
+	response.Success(ctx, gin.H{"token": token}, "登陆成功")
+	common.Logger.Info("登陆成功", zap.String("login success", foundUser.Telephone))
 }
 
-func Info(ctx *gin.Context) {
-	user, _ := ctx.Get("user")
-
-	ctx.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": dto.ToUserDto(user.(model.User))}})
-}
-
+// 方法：判断电话号码是否存在
 func isTelephoneExist(db *gorm.DB, telephone string) bool {
+	// 查询数据库中是否存在该电话号码的用户
 	var user model.User
 	db.Where("telephone=?", telephone).First(&user)
+
+	// 如果用户存在，则返回true
 	if user.ID != 0 {
 		return true
 	}
+	// 否则返回false
 	return false
+}
+
+// Info 回复用户相关信息。
+//
+// 此函数从 gin.Context 中获取用户相关的信息，并以 JSON 格式返回这些信息。
+// 它不接受任何参数，但使用 gin.Context 来获取请求上下文中的用户数据。
+// 返回的状态码为 http.StatusOK，表示操作成功。
+
+// 用户信息查询
+// @Summary 获取用户信息
+// @Description 获取用户信息
+// @Tags User 信息
+// @Accept json
+// @Produce json
+// @Param user body model.User  true "用户信息"
+// @Success 200 {object} response.result{} "登录成功"
+// @Failure 400 {object} response.result{} "请求错误"
+// @Failure 500 {object} response.result{} "服务器错误"
+// @Router /auth/info [post]
+func Info(ctx *gin.Context) {
+	// 从上下文中获取用户相关的信息。
+	user, _ := ctx.Get("user")
+	userIds, _ := ctx.Get("userId")
+	token, _ := ctx.Get("token")
+	claims, _ := ctx.Get("claims")
+	password, _ := ctx.Get("password")
+	telephone, _ := ctx.Get("telephone")
+
+	// 构建并返回包含用户信息的 JSON 响应。
+	ctx.JSON(http.StatusOK, gin.H{
+		"code": http.StatusOK,
+		"data": gin.H{
+			"user":      user,
+			"userId":    userIds,
+			"telephone": telephone,
+			"password":  password,
+			"token":     token,
+			"claims":    claims,
+		},
+		"msg": "获取用户信息成功",
+	})
+
+	//fmt.Println(user, userIds, token, claims, password, telephone)
 }

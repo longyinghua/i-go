@@ -1,11 +1,13 @@
 package common
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"io"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -161,6 +163,10 @@ func GinLogger() gin.HandlerFunc {
 		start := time.Now()
 		path := context.Request.URL.Path
 		queryRaw := context.Request.URL.RawQuery
+		// 读取请求体
+		bodyBytes, _ := io.ReadAll(context.Request.Body)
+		// 恢复请求体，因为读取后 Body 就被清空了
+		context.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
 
 		context.Next()
 
@@ -170,11 +176,12 @@ func GinLogger() gin.HandlerFunc {
 			zap.Int("StatusCode", context.Writer.Status()),        //  状态码
 			zap.String("method", context.Request.Method),          //  请求方法
 			zap.String("path", path),                              //  请求路径
-			zap.String("query", queryRaw),                         //  请求中的查询参数
+			zap.String("query-param", queryRaw),                   //  请求中的查询参数
+			zap.String("request-body", string(bodyBytes)),         //  请求中的请求体
 			zap.String("ip", context.ClientIP()),                  //  客户端IP地址
 			zap.String("user-agent", context.Request.UserAgent()), //  客户端UA
 			zap.String("errors", context.Errors.ByType(gin.ErrorTypePrivate).String()),
-			zap.Duration("cost", cost), //  执行时间
+			zap.Duration("cost-time", cost), //  执行时间
 		)
 	}
 }

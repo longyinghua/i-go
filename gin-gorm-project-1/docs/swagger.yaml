@@ -1,0 +1,123 @@
+basePath: /api/
+definitions:
+  model.User:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+      telephone:
+        type: string
+    type: object
+  response.result:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+host: 127.0.0.1:9090
+info:
+  contact:
+    email: 542791872@qq.com
+    name: 龙应华
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /auth/info:
+    post:
+      consumes:
+      - application/json
+      description: 获取用户信息
+      parameters:
+      - description: 用户信息
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 登录成功
+          schema:
+            $ref: '#/definitions/response.result'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/response.result'
+        "500":
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/response.result'
+      summary: 获取用户信息
+      tags:
+      - User 信息
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: 用户登录
+      parameters:
+      - description: 登录用户信息
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 登录成功
+          schema:
+            $ref: '#/definitions/response.result'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/response.result'
+        "500":
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/response.result'
+      summary: 用户登录
+      tags:
+      - User登陆
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: 用户注册
+      parameters:
+      - description: 注册用户信息
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 注册成功
+          schema:
+            $ref: '#/definitions/response.result'
+        "400":
+          description: 请求参数错误
+          schema:
+            $ref: '#/definitions/response.result'
+        "422":
+          description: 用户已存在
+          schema:
+            $ref: '#/definitions/response.result'
+      summary: 用户注册
+      tags:
+      - User注册
+swagger: "2.0"

@@ -1,0 +1,22 @@
+2024-06-11 16:44:48.466	[ERROR]	[controller/UserController.go:25]	book param bind json error	{"error": "json: cannot unmarshal number into Go struct field User.telephone of type string"}
+2024-06-11 16:44:48.469	[ERROR]	[controller/UserController.go:44]	参数校验失败	{"msg": "json: cannot unmarshal number into Go struct field User.telephone of type string"}
+2024-06-11 16:45:05.773	[ERROR]	[controller/UserController.go:25]	book param bind json error	{"error": "json: cannot unmarshal number into Go struct field User.telephone of type string"}
+2024-06-11 16:45:05.774	[ERROR]	[controller/UserController.go:44]	参数校验失败	{"msg": "json: cannot unmarshal number into Go struct field User.telephone of type string"}
+2024-06-11 17:08:04.933	[ERROR]	[controller/UserController.go:25]	book param bind json error	{"error": "json: cannot unmarshal number into Go struct field User.telephone of type string"}
+2024-06-11 17:08:04.935	[ERROR]	[controller/UserController.go:44]	参数校验失败	{"msg": "json: cannot unmarshal number into Go struct field User.telephone of type string"}
+2024-06-11 17:14:05.031	[ERROR]	[controller/UserController.go:25]	book param bind json error	{"error": "json: cannot unmarshal number into Go struct field User.telephone of type string"}
+2024-06-11 17:14:05.033	[ERROR]	[controller/UserController.go:44]	参数校验失败	{"msg": "json: cannot unmarshal number into Go struct field User.telephone of type string"}
+2024-06-12 16:40:51.261	[ERROR]	[controller/UserController.go:38]	user param bind json error	{"error": "json: cannot unmarshal number into Go value of type model.User"}
+2024-06-12 16:42:03.702	[ERROR]	[controller/UserController.go:38]	user param bind json error	{"error": "json: cannot unmarshal number into Go value of type model.User"}
+2024-06-12 16:42:09.859	[ERROR]	[controller/UserController.go:38]	user param bind json error	{"error": "json: cannot unmarshal number into Go value of type model.User"}
+2024-06-12 16:44:29.855	[ERROR]	[controller/UserController.go:38]	user param bind json error	{"error": "json: cannot unmarshal number into Go value of type model.User"}
+2024-06-12 16:45:31.873	[ERROR]	[controller/UserController.go:38]	user param bind json error	{"error": "json: cannot unmarshal string into Go value of type model.User"}
+2024-06-12 17:24:59.180	[ERROR]	[controller/UserController.go:117]	requestuser param bind json error	{"error": "EOF"}
+2024-06-12 17:34:55.545	[ERROR]	[controller/UserController.go:117]	requestuser param bind json error	{"error": "EOF"}
+2024-06-12 17:35:46.505	[ERROR]	[controller/UserController.go:117]	requestuser param bind json error	{"error": "EOF"}
+2024-06-12 17:43:58.153	[ERROR]	[controller/UserController.go:117]	requestuser param bind json error	{"error": "EOF"}
+2024-06-12 17:46:17.038	[ERROR]	[controller/UserController.go:117]	requestuser param bind json error	{"error": "EOF"}
+2024-06-12 17:48:46.672	[ERROR]	[controller/UserController.go:117]	requestuser param bind json error	{"error": "EOF"}
+2024-06-12 17:48:55.209	[ERROR]	[controller/UserController.go:117]	requestuser param bind json error	{"error": "EOF"}
+2024-06-12 17:49:05.978	[ERROR]	[controller/UserController.go:117]	requestuser param bind json error	{"error": "EOF"}
+2024-06-12 17:51:42.574	[ERROR]	[controller/UserController.go:35]	user param bind json error	{"error": "EOF"}
