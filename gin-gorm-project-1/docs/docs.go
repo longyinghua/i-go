@@ -20,7 +20,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/auth/info": {
+        "/auth/information": {
             "post": {
                 "description": "获取用户信息",
                 "consumes": [
@@ -30,29 +30,29 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User 信息"
+                    "token 信息"
                 ],
                 "summary": "获取用户信息",
                 "parameters": [
                     {
-                        "description": "用户信息",
-                        "name": "user",
+                        "description": "用户token信息",
+                        "name": "tokenkey",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.User"
+                            "$ref": "#/definitions/model.Token"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "登录成功",
+                        "description": "获取用户信息成功",
                         "schema": {
                             "$ref": "#/definitions/response.result"
                         }
                     },
                     "400": {
-                        "description": "请求错误",
+                        "description": "获取用户信息失败",
                         "schema": {
                             "$ref": "#/definitions/response.result"
                         }
@@ -157,9 +157,63 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/user/delete": {
+            "post": {
+                "description": "删除用户信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user信息删除"
+                ],
+                "summary": "删除用户信息",
+                "parameters": [
+                    {
+                        "description": "用户token信息",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取用户信息成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.result"
+                        }
+                    },
+                    "400": {
+                        "description": "获取用户信息失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.result"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.result"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "model.Token": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
         "model.User": {
             "type": "object",
             "properties": {

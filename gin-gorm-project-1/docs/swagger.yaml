@@ -1,5 +1,10 @@
 basePath: /api/
 definitions:
+  model.Token:
+    properties:
+      token:
+        type: string
+    type: object
   model.User:
     properties:
       id:
@@ -30,27 +35,27 @@ info:
   title: Swagger Example API
   version: "1.0"
 paths:
-  /auth/info:
+  /auth/information:
     post:
       consumes:
       - application/json
       description: 获取用户信息
       parameters:
-      - description: 用户信息
+      - description: 用户token信息
         in: body
-        name: user
+        name: tokenkey
         required: true
         schema:
-          $ref: '#/definitions/model.User'
+          $ref: '#/definitions/model.Token'
       produces:
       - application/json
       responses:
         "200":
-          description: 登录成功
+          description: 获取用户信息成功
           schema:
             $ref: '#/definitions/response.result'
         "400":
-          description: 请求错误
+          description: 获取用户信息失败
           schema:
             $ref: '#/definitions/response.result'
         "500":
@@ -59,7 +64,7 @@ paths:
             $ref: '#/definitions/response.result'
       summary: 获取用户信息
       tags:
-      - User 信息
+      - token 信息
   /auth/login:
     post:
       consumes:
@@ -120,4 +125,34 @@ paths:
       summary: 用户注册
       tags:
       - User注册
+  /user/delete:
+    post:
+      consumes:
+      - application/json
+      description: 删除用户信息
+      parameters:
+      - description: 用户token信息
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取用户信息成功
+          schema:
+            $ref: '#/definitions/response.result'
+        "400":
+          description: 获取用户信息失败
+          schema:
+            $ref: '#/definitions/response.result'
+        "500":
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/response.result'
+      summary: 删除用户信息
+      tags:
+      - user信息删除
 swagger: "2.0"

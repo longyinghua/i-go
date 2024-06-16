@@ -8,3 +8,9 @@ datasource:
   username: root
   password: Lyh150098!@#
   charset: utf8mb4
+redis:
+  host: 74.48.19.200
+  port: 63790
+  password: Lyh150098!@#
+  database: 0
+  timeout: 10000ms
