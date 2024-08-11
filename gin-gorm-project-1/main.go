@@ -66,6 +66,7 @@ func main() {
 
 	if swagHandler != nil {
 		engine.GET("/swagger/*any", swagHandler)
+		//swagger访问地址 http://127.0.0.1:9090/swagger/index.html
 	}
 
 	//启动服务
